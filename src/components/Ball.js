@@ -17,7 +17,7 @@ class Ball extends React.Component {
   checkForMotionSupport(e) {
 		const canHandleMotion = e; // Will be either null or have event data
 
-		if (canHandleMotion !== null) {
+		if (canHandleMotion !== null && e.accelerationIncludingGravity.x !== null) {
 			this.hasMotionSupport();
 		} else {
 			this.noMotionSupport();
@@ -35,7 +35,11 @@ class Ball extends React.Component {
 	}
 
   noMotionSupport() {
-
+    window.onmousemove = (e) => {
+      const ax =  (e.clientX - window.innerWidth/2) / 30;
+      const ay = -(e.clientY - window.innerHeight/2) / 30;
+      this.props.move(ax,ay);
+    };
 	}
 
   render() {
