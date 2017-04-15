@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import * as ball from '../constants/ball';
+import {BALL_RADIUS, WALL_TICKNESS} from '../constants/sizes';
 import initialState from './initialState';
 import walls from '../data/walls';
 import {doesLineCircleIntersect} from '../utils/intersection';
@@ -7,8 +7,8 @@ import {doesLineCircleIntersect} from '../utils/intersection';
 export default function ballReducer(state = initialState.ball, action) {
   switch (action.type) {
     case types.MOVE: {
-      const ax = Math.min(action.ax, ball.SIZE);
-      const ay = Math.min(action.ay, ball.SIZE);
+      const ax = Math.min(action.ax, BALL_RADIUS);
+      const ay = Math.min(action.ay, BALL_RADIUS);
       let x = state.x + ax;
       let y = state.y - ay;
       const hitsWall = walls.filter(wall => doesLineCircleIntersect({
@@ -16,7 +16,7 @@ export default function ballReducer(state = initialState.ball, action) {
         y1: wall[1] - y,
         x2: wall[2] - x,
         y2: wall[3] - y,
-        r: ball.SIZE
+        r: BALL_RADIUS + WALL_TICKNESS/2
       })).length !== 0;
       if(hitsWall) {
         return state;

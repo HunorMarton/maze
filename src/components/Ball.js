@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import * as ball from '../constants/ball';
+import {BALL_RADIUS} from '../constants/sizes';
 
 class Ball extends React.Component {
   constructor(props, context) {
@@ -39,7 +39,7 @@ class Ball extends React.Component {
 	}
 
   render() {
-    return <circle className="ball" cx={this.props.x} cy={this.props.y} r={ball.SIZE}/>;
+    return <circle className="ball" cx={this.props.x} cy={this.props.y} r={BALL_RADIUS}/>;
   }
 }
 
