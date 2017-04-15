@@ -1,9 +1,14 @@
 import React, {PropTypes} from 'react';
 import {BALL_RADIUS} from '../constants/sizes';
+import NoMotionSupport from './NoMotionSupport';
 
 class Ball extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      noMotionSupport: false
+    };
 
     this.checkForMotionSupport = this.checkForMotionSupport.bind(this);
     this.hasMotionSupport = this.hasMotionSupport.bind(this);
@@ -27,7 +32,7 @@ class Ball extends React.Component {
 	}
 
   hasMotionSupport() {
-		window.ondevicemotion = (e) => {
+    window.ondevicemotion = (e) => {
       const ax = e.accelerationIncludingGravity.x;
       const ay = e.accelerationIncludingGravity.y;
       this.props.move(ax,ay);
@@ -35,15 +40,24 @@ class Ball extends React.Component {
 	}
 
   noMotionSupport() {
+    this.setState({noMotionSupport: true});
+
+		/*
+    // For debug purposes
     window.onmousemove = (e) => {
       const ax =  (e.clientX - window.innerWidth/2) / 30;
       const ay = -(e.clientY - window.innerHeight/2) / 30;
       this.props.move(ax,ay);
     };
+    */
 	}
 
   render() {
-    return <circle className="ball" cx={this.props.x} cy={this.props.y} r={BALL_RADIUS}/>;
+    if(this.state.noMotionSupport === true) {
+      return <NoMotionSupport />;  
+    }else{
+      return <circle className="ball" cx={this.props.x} cy={this.props.y} r={BALL_RADIUS}/>;
+    }
   }
 }
 
