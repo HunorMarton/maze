@@ -8,8 +8,8 @@ export default function ballReducer(state = initialState.ball, action) {
   switch (action.type) {
     case types.MOVE: {
       const r = BALL_RADIUS + WALL_TICKNESS/2;
-      const ax = Math.max(Math.min(action.ax, r), - r);
-      const ay = Math.max(Math.min(action.ay, r), - r);
+      const ax = Math.max(Math.min(action.ax, r*2), - r*2);
+      const ay = Math.max(Math.min(action.ay, r*2), - r*2);
       let x = state.x + ax;
       let y = state.y - ay;
       walls.filter(wall => doesLineSegmentCircleIntersect({

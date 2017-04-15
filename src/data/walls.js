@@ -28,7 +28,7 @@ const maze = [
   // Horizontal walls
   [1,1,9,1],
 
-  [2,2,4,2],
+  [2,2,5,2],
 
   [5,3,8,3],
 
@@ -48,6 +48,12 @@ const maze = [
   [6,8,7,8],
 
   [1,9,9,9],
+
+  /*
+  // Debug walls
+  [5,5,8,5],
+  [5,5,5,8]
+  */
 ];
 
 export default maze.map(wall => wall.map(coord => coord*20));
