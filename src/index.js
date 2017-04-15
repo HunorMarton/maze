@@ -3,7 +3,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import Root from './components/Root';
+import Maze from './containers/Maze';
 import {move} from './actions/ballActions';
 import configureStore from './store/configureStore';
 require('./favicon.ico'); // Tell webpack to load favicon.ico
@@ -17,17 +17,17 @@ store.dispatch(move(10, 10));
 
 render(
   <AppContainer>
-    <Root store={store} />
+    <Maze store={store} />
   </AppContainer>,
   document.getElementById('app')
 );
 
 if (module.hot) {
-  module.hot.accept('./components/Root', () => {
-    const NewRoot = require('./components/Root').default;
+  module.hot.accept('./containers/Maze', () => {
+    const NewMaze = require('./containers/Maze').default;
     render(
       <AppContainer>
-        <NewRoot store={store} />
+        <NewMaze store={store} />
       </AppContainer>,
       document.getElementById('app')
     );
