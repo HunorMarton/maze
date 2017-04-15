@@ -58,20 +58,51 @@ export function doesLineSegmentCircleIntersect({x1, y1, x2, y2, cx, cy, r}) {
 }
 
 export function modifyCirclePath({x1, y1, x2, y2, cx, cy, r}) {
-  if(x1 === x2) {
-    if(cx < x1) {
-      cx = x1-r;
+  if(x1 === x2) { // Vertical line
+    if(cy > y1 && cy < y2) { // The ball hits the side of the wall
+      if(cx < x1) {
+        return {cx: x1-r, cy};
+      }else{
+        return {cx: x1+r, cy};
+      }
+    }else if(cy < y1) { // The ball hits the first edge of the wall
+      return moveBallAwayFromWallEdge({x: x1, y: y1, cx, cy, r});
     }else{
-      cx = x1+r;
+      return moveBallAwayFromWallEdge({x: x2, y: y2, cx, cy, r});
     }
-  }else if(y1 === y2){
-    if(cy < y1) {
-      cy = y1-r;
+
+  }else if(y1 === y2){ // Horizontal line
+    if(cx > x1 && cx < x2) { // The ball hits the side of the wall
+      if(cy < y1) {
+        return {cx, cy: y1-r};
+      }else{
+        return {cx, cy: y1+r};
+      }
+    }else if(cx < x1) { // The ball hits the first edge of the wall
+      return moveBallAwayFromWallEdge({x: x1, y: y1, cx, cy, r});
     }else{
-      cy = y1+r;
+      return moveBallAwayFromWallEdge({x: x2, y: y2, cx, cy, r});
     }
+
   }else{
     throw 'Walls should be either vertical or horizontal';
   }
-  return {cx, cy};
+}
+
+function moveBallAwayFromWallEdge({x,y,cx,cy,r}) {
+  const radian = calculateAngle({x1: x, y1: y, x2: cx, y2: cy});
+
+  return {
+    cx: x + r*Math.cos(radian),
+    cy: y + r*Math.sin(radian)
+  };
+}
+
+function calculateAngle({x1, y1, x2, y2}) {
+  const horizontalLeg = x2-x1;
+  const verticalLeg = y2-y1;
+  const hypotenuse = Math.sqrt(Math.pow(verticalLeg, 2) + Math.pow(horizontalLeg, 2));
+  //const radian = horizontalLeg > 0 ? Math.asin(verticalLeg / hypotenuse) : - Math.asin(verticalLeg / hypotenuse) + Math.PI; // -90 270
+  const radian = verticalLeg > 0 ? Math.acos(horizontalLeg / hypotenuse) : Math.PI - Math.acos(horizontalLeg / hypotenuse) + Math.PI; // 0 360
+  return radian;
 }
