@@ -1,7 +1,6 @@
 export default {
   ball: {
     x: 100,
-    y: 350,
-    debug: 'init'
+    y: 350
   }
 };

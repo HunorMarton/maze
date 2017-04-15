@@ -7,22 +7,20 @@ import Canvas from '../components/Canvas';
 
 const Maze = (props) => {
   return (
-    <Canvas x={props.x} y={props.y} move={props.actions.move} debug={props.debug} />
+    <Canvas x={props.x} y={props.y} move={props.actions.move}/>
   );
 };
 
 Maze.propTypes = {
   actions: PropTypes.object.isRequired,
   x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  debug: PropTypes.string.isRequired
+  y: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     x: state.ball.x,
-    y: state.ball.y,
-    debug: state.ball.debug
+    y: state.ball.y
   };
 }
 

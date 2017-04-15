@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import walls from '../data/walls';
+import Ball from './Ball';
+import Wall from './Wall';
 
 class Canvas extends React.Component {
   constructor(props, context) {
@@ -51,16 +54,18 @@ class Canvas extends React.Component {
 
 
     return (
-      <div>
+      <div id="container">
         <div>
-          ax: {this.state.ax}
+          <div>
+            ax: {this.state.ax}
+          </div>
+          <div>
+            ay: {this.state.ay}
+          </div>
         </div>
-        <div>
-          ay: {this.state.ay}
-        </div>
-
-        <svg width="200" height="200">
-          <circle className="ball" cx={this.props.x} cy={this.props.y} r="20"/>
+        <svg width="500" height="500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          {walls.map(wall => <Wall key={wall} data={wall} />)}
+          <Ball x={this.props.x} y={this.props.y} />
         </svg>
       </div>
     );
@@ -70,7 +75,6 @@ class Canvas extends React.Component {
 Canvas.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
-  debug: PropTypes.string.isRequired,
   move: PropTypes.func.isRequired
 };
 

@@ -1,5 +1,7 @@
 import * as types from '../constants/actionTypes';
+import * as ball from '../constants/ball';
 import initialState from './initialState';
+import walls from '../data/walls';
 
 export default function ballReducer(state = initialState.ball, action) {
   switch (action.type) {
@@ -12,8 +14,7 @@ export default function ballReducer(state = initialState.ball, action) {
       y = Math.max(0, y);
       return Object.assign({}, state, {
         x,
-        y,
-        debug: 'reducer' + x + ' ' + y
+        y
       });
       }
     default:
