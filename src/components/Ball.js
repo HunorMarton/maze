@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {BALL_RADIUS} from '../constants/sizes';
 import NoMotionSupport from './NoMotionSupport';
+import getMobileOperatingSystem from '../utils/operatingSystemDetection';
 
 class Ball extends React.Component {
   constructor(props, context) {
@@ -35,7 +36,15 @@ class Ball extends React.Component {
     window.ondevicemotion = (e) => {
       const ax = e.accelerationIncludingGravity.x;
       const ay = e.accelerationIncludingGravity.y;
-      this.props.move(ax,ay);
+      switch(getMobileOperatingSystem()) {
+        case "iOS":
+          this.props.move(ax,ay);
+          break;
+        case "Android":
+        this.props.move(-ax,-ay);
+        break;
+      }
+
 		};
 	}
 
@@ -52,9 +61,10 @@ class Ball extends React.Component {
     */
 	}
 
+
   render() {
     if(this.state.noMotionSupport === true) {
-      return <NoMotionSupport />;  
+      return <NoMotionSupport />;
     }else{
       return <circle className="ball" cx={this.props.x} cy={this.props.y} r={BALL_RADIUS}/>;
     }
