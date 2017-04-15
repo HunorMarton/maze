@@ -1,6 +1,6 @@
 export default {
   ball: {
-    x: 100,
-    y: 350
+    x: 50,
+    y: 50
   }
 };

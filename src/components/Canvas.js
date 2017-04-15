@@ -36,8 +36,8 @@ class Canvas extends React.Component {
 
   hasMotionSupport() {
 		window.ondevicemotion = (e) => {
-      const ax = e.accelerationIncludingGravity.x * 5;
-      const ay = e.accelerationIncludingGravity.y * 5;
+      const ax = e.accelerationIncludingGravity.x;
+      const ay = e.accelerationIncludingGravity.y;
       this.setState({
         ax: Math.round(ax),
         ay: Math.round(ay)

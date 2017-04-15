@@ -4,7 +4,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './components/Root';
-
+import {move} from './actions/ballActions';
 import configureStore from './store/configureStore';
 require('./favicon.ico'); // Tell webpack to load favicon.ico
 import './styles/styles.scss';
@@ -12,6 +12,7 @@ import './styles/styles.scss';
 const store = configureStore();
 
 // Initial actions...
+store.dispatch(move(10, 10));
 
 
 render(
