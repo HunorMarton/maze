@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {BALL_RADIUS} from '../constants/sizes';
-import GyroscopeNotFound from './GyroscopeNotFound';
+import GyroscopeNotFound from './messages/GyroscopeNotFound';
+import PortraitModeRequired from './messages/PortraitModeRequired';
 import getMobileOperatingSystem from '../utils/operatingSystemDetection';
 
 class Ball extends React.Component {
@@ -8,7 +9,8 @@ class Ball extends React.Component {
     super(props, context);
 
     this.state = {
-      noMotionSupport: true // By default let's assume it's not working
+      motionSupport: false, // By default let's assume it's not working,
+      portraitMode: true
     };
 
     this.checkForMotionSupport = this.checkForMotionSupport.bind(this);
@@ -24,7 +26,7 @@ class Ball extends React.Component {
 		const canHandleMotion = e; // Will be either null or have event data
 
 		if (canHandleMotion !== null && typeof(e.accelerationIncludingGravity.x) === "number") {
-      this.setState({noMotionSupport: false});
+      this.setState({motionSupport: true});
 			this.hasMotionSupport();
 		} else {
 			this.noMotionSupport();
@@ -35,6 +37,11 @@ class Ball extends React.Component {
 
   hasMotionSupport() {
     window.ondevicemotion = (e) => {
+      if(window.innerWidth > window.innerHeight) {
+        this.setState({portraitMode: false});
+      }else{
+        this.setState({portraitMode: true});
+      }
       const ax = e.accelerationIncludingGravity.x;
       const ay = e.accelerationIncludingGravity.y;
       switch(getMobileOperatingSystem()) {
@@ -62,8 +69,10 @@ class Ball extends React.Component {
 
 
   render() {
-    if(this.state.noMotionSupport === true) {
+    if(this.state.motionSupport !== true) {
       return <GyroscopeNotFound />;
+    }else if(this.state.portraitMode === false){
+      return <PortraitModeRequired />;
     }else{
       return <circle className="ball" cx={this.props.x} cy={this.props.y} r={BALL_RADIUS}/>;
     }

@@ -4,7 +4,7 @@ import {connect, Provider} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/ballActions';
 import Canvas from '../components/Canvas';
-import DeviceNotSupported from '../components/DeviceNotSupported';
+import DeviceNotSupported from '../components/messages/DeviceNotSupported';
 import getMobileOperatingSystem from '../utils/operatingSystemDetection';
 
 class Maze extends React.Component {
