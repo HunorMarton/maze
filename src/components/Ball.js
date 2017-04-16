@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {BALL_RADIUS} from '../constants/sizes';
-import NoMotionSupport from './NoMotionSupport';
+import GyroscopeNotFound from './GyroscopeNotFound';
 import getMobileOperatingSystem from '../utils/operatingSystemDetection';
 
 class Ball extends React.Component {
@@ -63,7 +63,7 @@ class Ball extends React.Component {
 
   render() {
     if(this.state.noMotionSupport === true) {
-      return <NoMotionSupport />;
+      return <GyroscopeNotFound />;
     }else{
       return <circle className="ball" cx={this.props.x} cy={this.props.y} r={BALL_RADIUS}/>;
     }
