@@ -8,7 +8,7 @@ class Ball extends React.Component {
     super(props, context);
 
     this.state = {
-      noMotionSupport: false
+      noMotionSupport: true // By default let's assume it's not working
     };
 
     this.checkForMotionSupport = this.checkForMotionSupport.bind(this);
@@ -23,7 +23,8 @@ class Ball extends React.Component {
   checkForMotionSupport(e) {
 		const canHandleMotion = e; // Will be either null or have event data
 
-		if (canHandleMotion !== null && e.accelerationIncludingGravity.x !== null) {
+		if (canHandleMotion !== null && typeof(e.accelerationIncludingGravity.x) === "number") {
+      this.setState({noMotionSupport: false});
 			this.hasMotionSupport();
 		} else {
 			this.noMotionSupport();
@@ -49,8 +50,6 @@ class Ball extends React.Component {
 	}
 
   noMotionSupport() {
-    this.setState({noMotionSupport: true});
-
 		/*
     // For debug purposes
     window.onmousemove = (e) => {
