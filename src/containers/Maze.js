@@ -45,7 +45,7 @@ class Maze extends React.Component {
     }else if(this.state.motionSupport !== true) {
       content = <GyroscopeNotFound />;
     }else{
-      content = <Canvas x={this.props.x} y={this.props.y} move={this.props.actions.move}/>;
+      content = <Canvas x={this.props.x} y={this.props.y} ax={this.props.ax} ay={this.props.ay} move={this.props.actions.move}/>;
     }
     return (
       <Provider store={this.props.store}>
@@ -61,13 +61,17 @@ Maze.propTypes = {
   store: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired
+  y: PropTypes.number.isRequired,
+  ax: PropTypes.number.isRequired,
+  ay: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     x: state.ball.x,
-    y: state.ball.y
+    y: state.ball.y,
+    ax: state.tilt.ax,
+    ay: state.tilt.ay
   };
 }
 

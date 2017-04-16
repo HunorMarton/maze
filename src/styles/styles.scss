@@ -1,8 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik+Mono+One');
+@import url('https://fonts.googleapis.com/css?family=Roboto:500,900');
+
+// https://coolors.co/eaeaea-893131-491919-2d1b1b-050404
+// https://coolors.co/f2e6e6-932d2f-541516-381c1c-0f0a0b
+// https://coolors.co/f15025-ffffff-e8e6e5-d1cfcf-191919
 
 html {
   color: red;
-  font-family: 'Rubik Mono One', sans-serif;
+  background-color: #D1CFCF; //#1E1416;
+  font-family: 'Roboto', sans-serif;
 }
 
 #container {
@@ -19,20 +24,38 @@ html {
 }
 
 .ball {
-  fill: firebrick;
+  fill: url(#ballGradient);
+}
+
+.ballShadow {
+  fill: url(#ballShadowGradient);
+  opacity: 0.4;
 }
 
 .wall {
-  stroke: gainsboro;
+  stroke: #F15025; //#DB1515; //#CE0300; //  932D2F
   stroke-width: 4;
   stroke-linecap: square;
 }
 
+.wallSideHorizontal {
+  fill: #702222; //#541516;
+}
+.wallSideVertical {
+  fill: #7C2626; //#381C1C;
+}
+
 .errorMessage {
+  h1 {
+    font-weight: 900;
+    font-size: 3em;
+    color: #F15025;
+    margin: 0;
+  }
   h2 {
-    color: #0B3954;
+    color: #702222;
   }
   p {
-    color: #0B3954;
+    color: #7C2626;
   }
 }

@@ -64,7 +64,17 @@ class Ball extends React.Component {
 
 
   render() {
-    return <circle className="ball" cx={this.props.x} cy={this.props.y} r={BALL_RADIUS}/>;
+    return (
+      <g>
+        <defs>
+          <radialGradient id="ballGradient" cx="0.5" cy="0.5" r="0.5" fx="0.25" fy="0.25">
+            <stop offset="10%" stopColor="#464948"/>
+            <stop offset="95%" stopColor="#222323"/>
+          </radialGradient>
+        </defs>
+        <circle className="ball" cx={this.props.x} cy={this.props.y} r={BALL_RADIUS}/>
+      </g>
+    );
   }
 }
 
