@@ -19,29 +19,16 @@ html {
 }
 
 .ball {
-  fill: red;
+  fill: firebrick;
 }
 
 .wall {
-  stroke: black;
+  stroke: gainsboro;
   stroke-width: 4;
   stroke-linecap: square;
 }
 
-.svgErrorMessage {
-  rect {
-    fill: rgba(white,0.8);
-  }
-  text.h1 {
-    fill: red;
-  }
-  text.h2 {
-    fill: #0B3954;
-    font-size: 0.5em;
-  }
-}
-
-#deviceNotSupported {
+.errorMessage {
   h2 {
     color: #0B3954;
   }

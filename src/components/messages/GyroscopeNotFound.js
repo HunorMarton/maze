@@ -1,10 +1,9 @@
 import React from 'react';
 
 const GyroscopeNotFound = () => (
-  <g id="svgErrorMessage">
-    <rect x="0" y="0" width="500" height="500" />
-    <text className="h1" x="20" y="80">Sorry,</text>
-    <text className="h2" x="20" y="100">Gyroscope not found.</text>
-  </g>
+  <div className="errorMessage">
+    <h1>Sorry,</h1>
+    <h2>Gyroscope not found.</h2>
+  </div>
 );
 export default GyroscopeNotFound;
